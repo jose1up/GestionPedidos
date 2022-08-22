@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db";
+import { Product } from "./Product";
 
 export const Category = sequelize.define("Category", {
   id: {
@@ -12,3 +13,8 @@ export const Category = sequelize.define("Category", {
     allowNull: false,
   },
 });
+
+///Relacion
+
+Category.hasMany(Product, { foreignKey: "Category_id", sourceKey: "id" });
+Product.belongsTo(Category, { foreignKey: "Category_id", targetKey: "id" });
