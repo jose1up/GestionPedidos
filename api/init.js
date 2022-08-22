@@ -1,6 +1,12 @@
 import { sequelize } from "./src/db/db";
-import "./src/db/models/Category.js";
+import "./src/db/models/Category";
 import "./src/db/models/Product";
+import "./src/db/models/Rol";
+import "./src/db/models/Person"
+import "./src/db/models/Table"
+import "./src/db/models/Order"
+import "./src/db/models/OrderDetail"
+
 
 export const init = async () => {
   try {
