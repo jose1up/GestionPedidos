@@ -25,7 +25,7 @@ export const findProductName = async (props) => {
   }
 };
 
-export const allProducto = async () => {
+export const allProducts = async () => {
   try {
     const allProduct = await Product.findAll({
       include: [Category],
