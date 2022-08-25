@@ -10,7 +10,7 @@ server.use("/api", routes);
 
 const main = async () => {
   await init();
-  await server.listen(port);
+  server.listen(port);
   console.log("running server on port " + port);
 };
 
