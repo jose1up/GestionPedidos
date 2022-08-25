@@ -5,6 +5,8 @@ import routes from "./src/routes";
 const server = express();
 const port = process.env.PORT || 3000;
 
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb" }));
 server.use(morgan("dev"));
 server.use("/api", routes);
 
