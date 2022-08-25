@@ -2,7 +2,7 @@ import { Category } from "../../db/models/Category";
 import { OrderDetail } from "../../db/models/OrderDetail";
 import { Product } from "../../db/models/Product";
 import {
-  allProducto,
+  allProducts,
   createProduct,
   findProductName,
 } from "../../helpers/product";
@@ -40,7 +40,7 @@ export const getProduct = async (req, res) => {
         ? res.send(product)
         : res.status(404).send({ message: "Product not found" });
     } else {
-      let allProduct = await allProducto();
+      let allProduct = await allProducts();
       allProduct.length
         ? res.send(allProduct)
         : res.status(404).send({ message: "empty tables products" });
