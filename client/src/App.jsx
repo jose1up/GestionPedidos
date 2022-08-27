@@ -1,8 +1,8 @@
-import { Flex, VStack } from "@chakra-ui/react";
+import { Flex, VStack, Stack, Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ProductDetail from "./components/productDetail";
+import ProductContainer from "./components/ProductContainer";
 import { getAllProduct } from "./redux/actions/products";
 
 function App() {
@@ -12,11 +12,11 @@ function App() {
     dispatch(getAllProduct());
   }, []);
   return (
-    <VStack>
+    <Box w="-webkit-max-content">
       {allProducts &&
         allProducts.map((product) => {
           return (
-            <ProductDetail
+            <ProductContainer
               key={product.id}
               id={product.id}
               name={product.name}
@@ -26,7 +26,7 @@ function App() {
             />
           );
         })}
-    </VStack>
+    </Box>
   );
 }
 

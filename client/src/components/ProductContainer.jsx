@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, HStack, chakra } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-export default function ProductDetail({ id, img, name, price, description }) {
+export default function ProductContainer({ id, img, name, price, description }) {
   return (
     <Flex
       bg="#edf3f8"
@@ -10,13 +10,12 @@ export default function ProductDetail({ id, img, name, price, description }) {
         bg: "#3e3e3e",
       }}
       p={50}
-      w="fullscreen"
-      alignItems="center"
-      justifyContent="center"
+      w="lg"
+      alignItems="stretch"
+      justifyContent="normal"
     >
       <Flex
         maxW="md"
-        w="container.lg"
         mx="auto"
         bg="white"
         _dark={{
@@ -35,14 +34,14 @@ export default function ProductDetail({ id, img, name, price, description }) {
         ></Box>
 
         <Box
-          w={1 / 2}
+          w={2 / 3}
           p={{
             base: 4,
             md: 4,
           }}
         >
           <chakra.h1
-            fontSize="4xl"
+            fontSize="2xl"
             fontWeight="bold"
             color="gray.800"
             _dark={{
@@ -60,7 +59,7 @@ export default function ProductDetail({ id, img, name, price, description }) {
               color: "gray.400",
             }}
           >
-            {description}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit In odit
           </chakra.p>
 
           <HStack spacing={1} display="flex" alignItems="center" mt={2}>
@@ -87,7 +86,7 @@ export default function ProductDetail({ id, img, name, price, description }) {
           </HStack>
 
           <Flex mt={3} alignItems="center" justifyContent="space-between">
-            <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
+            <chakra.h1 color="black" fontWeight="bold" fontSize="lg">
               ${price}
             </chakra.h1>
             <chakra.button
