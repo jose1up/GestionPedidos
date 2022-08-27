@@ -2,6 +2,7 @@ import { Flex, VStack, Stack, Box } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Headers from "./components/Headers";
 import ProductContainer from "./components/ProductContainer";
 import { getAllProduct } from "./redux/actions/products";
 
@@ -12,7 +13,8 @@ function App() {
     dispatch(getAllProduct());
   }, []);
   return (
-    <Box w="-webkit-max-content">
+    <Box w="100%">
+      <Headers />
       {allProducts &&
         allProducts.map((product) => {
           return (

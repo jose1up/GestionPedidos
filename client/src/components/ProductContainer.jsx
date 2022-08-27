@@ -2,15 +2,21 @@ import React from "react";
 import { Box, Flex, HStack, chakra } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
-export default function ProductContainer({ id, img, name, price, description }) {
+export default function ProductContainer({
+  id,
+  img,
+  name,
+  price,
+  description,
+}) {
   return (
     <Flex
       bg="#edf3f8"
       _dark={{
         bg: "#3e3e3e",
       }}
-      p={50}
-      w="lg"
+      p="2"
+      w="100%"
       alignItems="stretch"
       justifyContent="normal"
     >
@@ -86,7 +92,14 @@ export default function ProductContainer({ id, img, name, price, description }) 
           </HStack>
 
           <Flex mt={3} alignItems="center" justifyContent="space-between">
-            <chakra.h1 color="black" fontWeight="bold" fontSize="lg">
+            <chakra.h1
+              color="gray.900"
+              _dark={{
+                color: "gray.400",
+              }}
+              fontWeight="bold"
+              fontSize="lg"
+            >
               ${price}
             </chakra.h1>
             <chakra.button
