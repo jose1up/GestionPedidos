@@ -1,34 +1,14 @@
 import { Flex, VStack, Stack, Box } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Headers from "./components/Headers";
-import ProductContainer from "./components/ProductContainer";
-import { getAllProduct } from "./redux/actions/products";
+import { useEffect } from "react";
+import { ProductList } from "./components/ProductList";
 
 function App() {
-  const dispatch = useDispatch();
-  const allProducts = useSelector((state) => state.product.allProduct);
-  useEffect(() => {
-    dispatch(getAllProduct());
-  }, []);
   return (
-    <Box w="100%">
+    <Stack display="contents" >
       <Headers />
-      {allProducts &&
-        allProducts.map((product) => {
-          return (
-            <ProductContainer
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              img={product.img}
-              description={product.description}
-            />
-          );
-        })}
-    </Box>
+      <ProductList />
+    </Stack>
   );
 }
 

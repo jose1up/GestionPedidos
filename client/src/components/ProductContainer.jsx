@@ -15,7 +15,7 @@ export default function ProductContainer({
       _dark={{
         bg: "#3e3e3e",
       }}
-      p="2"
+      p="4"
       w="100%"
       alignItems="stretch"
       justifyContent="normal"
@@ -46,16 +46,29 @@ export default function ProductContainer({
             md: 4,
           }}
         >
-          <chakra.h1
-            fontSize="2xl"
-            fontWeight="bold"
-            color="gray.800"
-            _dark={{
-              color: "white",
-            }}
-          >
-            {name}
-          </chakra.h1>
+          {name.length < 30 ? (
+            <chakra.h1
+              fontSize="2xl"
+              fontWeight="bold"
+              color="gray.800"
+              _dark={{
+                color: "white",
+              }}
+            >
+              {name}
+            </chakra.h1>
+          ) : (
+            <chakra.h3
+              fontSize="1xl"
+              fontWeight="bold"
+              color="gray.800"
+              _dark={{
+                color: "white",
+              }}
+            >
+              {name}
+            </chakra.h3>
+          )}
 
           <chakra.p
             mt={2}
@@ -118,7 +131,7 @@ export default function ProductContainer({
                 bg: "gray.400",
               }}
             >
-              Add to cart
+              Add to orders
             </chakra.button>
           </Flex>
         </Box>
