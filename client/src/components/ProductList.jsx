@@ -1,8 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Flex, VStack, Stack, Box, Container } from "@chakra-ui/react";
+import {
+  Flex,
+  VStack,
+  Stack,
+  Box,
+  Container,
+  Skeleton,
+} from "@chakra-ui/react";
 import { getAllProduct } from "../redux/actions/products";
 import ProductContainer from "./ProductContainer";
+import { useState } from "react";
 
 export const ProductList = () => {
   const dispatch = useDispatch();
