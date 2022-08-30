@@ -9,25 +9,23 @@ import {
 
 export const createNewProduct = async (req, res) => {
   try {
-    const { name, price, img, description, Category_id, OrderDetail_id } =
-      req.body;
-
+    const { name, price, img, description, Category_id, OrderDetail_id } = req.body;
     if (name && price && description) {
       let newProduct = {
         name,
-        price,
+        price: parseFloat(price),
         img,
         description,
         Category_id: parseInt(Category_id),
       };
       await createProduct(newProduct);
-
+      
       res.status(201).send({ message: "Product created successfully" });
     } else {
       res.status(404).send({ message: "Product not Create" });
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
   }
 };
 
