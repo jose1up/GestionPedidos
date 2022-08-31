@@ -31,7 +31,7 @@ export const createNewProduct = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name } = req.query;
     if (name) {
       let product = await findProductName(name);
       product
@@ -43,5 +43,7 @@ export const getProduct = async (req, res) => {
         ? res.send(allProduct)
         : res.status(404).send({ message: "empty tables products" });
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+  }
 };
