@@ -22,6 +22,17 @@ export const getAllProduct = () => {
   }
 };
 
+
+export const createProduct = (input) => {
+  try{
+    return async () => {
+      let response = await axios.post(`${url}/products/createProduct`,input)
+    }
+  }catch(error){
+    console.log(error)
+  }
+}
+
 // Peticion de los productos que macheen con name que pasamos
 export const findProduct = (name) => {
   try {
@@ -36,3 +47,4 @@ export const findProduct = (name) => {
     console.error(error);
   }
 };
+

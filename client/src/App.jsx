@@ -3,12 +3,15 @@ import Headers from "./components/Headers";
 import { useEffect } from "react";
 import { ProductList } from "./components/ProductList";
 import Scaner from "./components/scaner";
+import { NewProduct } from "./components/counter";
 
 function App() {
   return (
     <Stack display="contents">
       <Headers />
-      <ProductList />
+      <NewProduct/>
+      {/* <Scaner /> */}
+      {/* <ProductList/> */}
     </Stack>
   );
 }
