@@ -13,7 +13,7 @@ import { getAllProduct } from "../redux/actions/products";
 import ProductContainer from "./ProductContainer";
 import { useState } from "react";
 import { addToCart } from "../redux/actions/Cart";
-import { getAllCategorys } from "../redux/actions/Categorys";
+import {getAllCategory } from "../redux/actions/Category";
 
 export const ProductList = () => {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export const ProductList = () => {
   const allProducts = useSelector((state) => state.product.allProduct);
   useEffect(() => {
     dispatch(getAllProduct());
-    dispatch(getAllCategorys());
+    dispatch(getAllCategory());
   }, []);
 
   function handleOnclick(id) {

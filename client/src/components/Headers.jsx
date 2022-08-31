@@ -28,8 +28,6 @@ import { useSelector } from "react-redux";
 export default function Headers() {
   const countCart = useSelector((state) => state.product.cart.length);
   const [open, setOpen] = useBoolean();
-
-  console.log(countCart);
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Flex
