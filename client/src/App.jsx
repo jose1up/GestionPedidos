@@ -8,7 +8,7 @@ function App() {
   return (
     <Stack display="contents">
       <Headers />
-      <Scaner />
+      <ProductList />
     </Stack>
   );
 }
