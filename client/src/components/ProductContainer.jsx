@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Flex, HStack, chakra } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/actions/Cart";
 
 export default function ProductContainer({
   id,
@@ -8,6 +10,7 @@ export default function ProductContainer({
   name,
   price,
   description,
+  handleOnclick,
 }) {
   return (
     <Flex
@@ -130,6 +133,7 @@ export default function ProductContainer({
               _focus={{
                 bg: "gray.400",
               }}
+              onClick={() => handleOnclick(id)}
             >
               Add to orders
             </chakra.button>
