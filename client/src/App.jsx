@@ -9,9 +9,8 @@ function App() {
   return (
     <Stack display="contents">
       <Headers />
-      <NewProduct/>
       {/* <Scaner /> */}
-      {/* <ProductList/> */}
+      <ProductList />
     </Stack>
   );
 }
