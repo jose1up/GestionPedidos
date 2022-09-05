@@ -19,7 +19,8 @@ import {
 export const NewProduct = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.allProduct);
-    const categorys = useSelector((state) => state.category.allCategorys);
+    const categorys = useSelector((state) => state.category.allCategory);
+
 
     const [input, setinput] = useState({
         name: '',

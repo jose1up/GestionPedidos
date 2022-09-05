@@ -1,17 +1,17 @@
 import { typesCategory } from "../actions/category";
 
 export const initialState = {
-  allCategorys: [],
+  allCategory: [],
 };
 
 const cases = {};
 
 cases[typesCategory.GET_ALL_CATEGORYS] = (initialState, payload) => ({
   ...initialState,
-  allCategorys: [...payload],
+  allCategory: [...payload],
 });
 
-export default function productReducer(
+export default function categotyReducer(
   state = initialState,
   { type, payload }
 ) {

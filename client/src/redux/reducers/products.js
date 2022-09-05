@@ -3,6 +3,7 @@ import { typesCart } from "../actions/Cart";
 
 export const initialState = {
   allProduct: [],
+  bkAllProducts: [],
   cart: [],
 };
 
@@ -11,6 +12,7 @@ const cases = {};
 cases[typesProducts.GET_ALL_PRODUCTS] = (initialState, payload) => ({
   ...initialState,
   allProduct: [...payload],
+  bkAllProducts: [...payload],
 });
 
 cases[typesProducts.FIND_PRODUCTS] = (state, payload) => {
@@ -18,6 +20,22 @@ cases[typesProducts.FIND_PRODUCTS] = (state, payload) => {
     ...state,
     allProduct: [...payload],
   };
+};
+
+cases[typesProducts.FILTER_FOR_CATEGORY] = (state, payload) => {
+  let filteredProducts = state.allProduct.filter(
+    (p) => p.Category_id == parseInt(payload)
+  );
+
+  return filteredProducts.length > 0
+    ? {
+        ...state,
+        allProduct: filteredProducts,
+      }
+    : {
+        ...state,
+        allProduct: state.allProduct,
+      };
 };
 
 cases[typesCart.ADD_TO_CART] = (state, payload) => {

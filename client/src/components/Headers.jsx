@@ -6,17 +6,19 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  Portal,
   IconButton,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  useDisclosure,
-  Center,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
   useBoolean,
   chakra,
+  useDisclosure,
+  Center,
+  Button,
 } from "@chakra-ui/react";
 
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -24,13 +26,16 @@ import React, { useState } from "react";
 import { MoonIcon, SunIcon, HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import Searchbar from "./Searchbar";
 import { useSelector } from "react-redux";
+import SelectContainer from "./SelectContainer";
 
 export default function Headers() {
   const countCart = useSelector((state) => state.product.cart.length);
   const [open, setOpen] = useBoolean();
-
-  console.log(countCart);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
+  const Category = useSelector((state) => state.category.allCategory);
+  const [placement, setPlacement] = React.useState("left");
+
   return (
     <Flex
       bg="gray.400"
@@ -46,16 +51,15 @@ export default function Headers() {
         <MenuButton onClick={setOpen.toggle}>
           <IconButton icon={open ? <CloseIcon /> : <HamburgerIcon />} m="8" />
         </MenuButton>
-        <MenuList onClick={setOpen.toggle}>
-          <MenuItem alignItems="center">
-            menu 1
-          </MenuItem>
+        <MenuList>
+          <SelectContainer name="Category" data={Category} />
         </MenuList>
       </Menu>
-      
+
       <IconButton
         aria-label="label"
         size="md"
+        onClick={onOpen}
         icon={
           <>
             <AiOutlineShoppingCart />
@@ -96,6 +100,27 @@ export default function Headers() {
         {colorMode === "light" ? <MoonIcon /> : <SunIcon color="while" />}
         <Switch colorScheme="telegram" size="lg" onChange={toggleColorMode} />
       </Box>
+      <Drawer placement={placement} onClose={onClose} isOpen={isOpen} size="md">
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader
+            display="flex"
+            alignSelf="stretch"
+            justifyContent="space-between"
+          >
+            <Center>Cart </Center>
+            <IconButton
+              icon={<CloseIcon />}
+              onClick={onClose}
+              m="4"
+              alignSelf="center"
+              _hover={{
+                bg: "red.500",
+              }}
+            />
+          </DrawerHeader>
+        </DrawerContent>
+      </Drawer>
     </Flex>
   );
 }

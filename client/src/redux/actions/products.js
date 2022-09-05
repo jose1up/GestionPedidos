@@ -5,6 +5,14 @@ const url = import.meta.env.VITE_URL;
 export const typesProducts = {
   GET_ALL_PRODUCTS: "GET_ALL_PRODUCTS",
   FIND_PRODUCTS: "FIND_PRODUCTS",
+  FILTER_FOR_CATEGORY: "FILTER_FOR_CATEGORY",
+};
+
+export const filterCategory = (payload) => {
+  return {
+    type: "FILTER_FOR_CATEGORY",
+    payload,
+  };
 };
 
 // Peticion de todos los productos al backend
@@ -22,16 +30,15 @@ export const getAllProduct = () => {
   }
 };
 
-
 export const createProduct = (input) => {
-  try{
+  try {
     return async () => {
-      let response = await axios.post(`${url}/products/createProduct`,input)
-    }
-  }catch(error){
-    console.log(error)
+      let response = await axios.post(`${url}/products/createProduct`, input);
+    };
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 // Peticion de los productos que macheen con name que pasamos
 export const findProduct = (name) => {
@@ -47,4 +54,3 @@ export const findProduct = (name) => {
     console.error(error);
   }
 };
-
