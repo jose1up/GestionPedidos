@@ -5,15 +5,13 @@ import { createProduct, getAllProduct } from "../redux/actions/products";
 import {
     FormControl,
     FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Button,
-    ButtonGroup,
-    Tabs,
-    TabList,
-    TabPanels,
-    Tab,
-    TabPanel
+    Radio,
+    RadioGroup,
+    Stack,
+    Box,
+    Textarea,
+    Input
 } from '@chakra-ui/react'
 
 export const NewProduct = () => {
@@ -25,9 +23,14 @@ export const NewProduct = () => {
     const [input, setinput] = useState({
         name: '',
         Category_id: '',
+        Cat_name: '',
         price: '',
-        img: ''
+        img: '',
+        description: ''
     });
+
+    const [modify, setModify] = useState("1");
+    const [newCat, setNewCat] = useState("1");
 
     useEffect(() => {
         dispatch(getAllProduct());
@@ -44,12 +47,27 @@ export const NewProduct = () => {
 
     const handleSelectChange = (e) => {
         e.preventDefault();
-        if (e.target.value !== "none") {
-            let cat = categorys.find((element) => element.name === e.target.value)
-            setinput({
-                ...input,
-                Category_id: cat.id
-            });
+        if (e.target.name === productName) {
+            if (e.target.value !== "none") {
+                let prod = products.find((element) => element.name === e.target.value)
+                console.log(prod.Category.name)
+                setinput({
+                    name: prod.name,
+                    Category_id: prod.Category_id,
+                    price: prod.price,
+                    img: prod.img,
+                    description: prod.description,
+                    Cat_name: prod.Category.name
+                })
+            }
+        } else {
+            if (e.target.value !== "none") {
+                let cat = categorys.find((element) => element.name === e.target.value)
+                setinput({
+                    ...input,
+                    Category_id: cat.id
+                });
+            }
         }
     }
 
@@ -60,41 +78,59 @@ export const NewProduct = () => {
     }
 
     return (
-        <Tabs isFitted variant='enclosed'>
-            <TabList mb='1em'>
-                <Tab>New Product</Tab>
-                <Tab>New Category</Tab>
-            </TabList>
-            <TabPanels>
-                <TabPanel>
-                    <FormControl onSubmit={(e) => handleSubmit(e)}>
-                        <FormLabel >Product</FormLabel>
-                        <input placeholder="product" type={"Text"} name="name" onChange={(e) => handleInputChange(e)} />
-                        <FormLabel >Category</FormLabel>
-                        <select placeholder="Select one" name="Category_id" onChange={(e) => handleSelectChange(e)}>
-                            <option key={0} value="none"></option>
-                            {categorys && categorys.map((cat) => {
-                                return (
-                                    <option
-                                        key={cat.id}
-                                        value={cat.name}>{cat.name}
-                                    </option>
-                                )
-                            })}
-                        </select>
-                        <FormLabel >Description</FormLabel>
-                        <input placeholder="Description" type={"text"} name="description" onChange={(e) => handleInputChange(e)} />
-                        <FormLabel >Price</FormLabel>
-                        <input placeholder="Price" type={"number"} name="price" onChange={(e) => handleInputChange(e)} />
-                        <FormLabel >Image</FormLabel>
-                        <input placeholder="Image" type={"url"} name="img" onChange={(e) => handleInputChange(e)} />
-                        <Button type="submit">Submit</Button>
-                    </FormControl>
-                </TabPanel>
-                <TabPanel>
-                    <h2>Not available yet</h2>
-                </TabPanel>
-            </TabPanels>
-        </Tabs>
+        <FormControl alignItems='center' onSubmit={(e) => handleSubmit(e)}>
+            <Box borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <RadioGroup onChange={setModify} value={modify} >
+                    <Stack direction="row">
+                        <Radio value={"1"}>Create new product</Radio>
+                        <Radio value={"2"}>Modify existing product</Radio>
+                    </Stack>
+                </RadioGroup>
+            </Box>
+            <Box borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <RadioGroup onChange={setNewCat} value={newCat} >
+                    <Stack direction="row">
+                        <Radio value={"1"}>Use existing category</Radio>
+                        <Radio value={"2"}>Create new category</Radio>
+                    </Stack>
+                </RadioGroup>
+            </Box>
+            <FormLabel >Product</FormLabel>
+            {modify === "1"
+                ? <Input placeholder="product" type={"Text"} name="name" onChange={(e) => handleInputChange(e)} />
+                : <select name="productName" placeholder="Select product" onChange={(e) => handleSelectChange(e)}>
+                    <option key={0} value="none"></option>
+                    {products && products.map((prod) => {
+                        return (
+                            <option
+                                key={prod.id}
+                                value={prod.name}>{prod.name}
+                            </option>)
+                    })}
+                </select>
+            }
+            <FormLabel >Category</FormLabel>
+            {newCat === "2"
+                ? <Input placeholder={input.Cat_name || 'New category'} type={"Text"} name="new_category" onChange={(e) => handleInputChange(e)} />
+                : <select placeholder="Select one" name="Category_id" onChange={(e) => handleSelectChange(e)} value={input.Cat_name} >
+                    <option key={0} value="none"></option>
+                    {categorys && categorys.map((cat) => {
+                        return (
+                            <option
+                                key={cat.id}
+                                value={cat.name}>{cat.name}
+                            </option>
+                        )
+                    })}
+                </select>
+            }
+            <FormLabel >Description</FormLabel>
+            <Textarea placeholder="Description" type={"text"} name="description" onChange={(e) => handleInputChange(e)} value={input.description || ''} />
+            <FormLabel >Price</FormLabel>
+            <Input placeholder="Price" type={"number"} name="price" onChange={(e) => handleInputChange(e)} value={input.price} />
+            <FormLabel >Image</FormLabel>
+            <Input placeholder="Image" type={"url"} name="img" onChange={(e) => handleInputChange(e)} value={input.img} />
+            <Button type="submit">Submit</Button>
+        </FormControl >
     )
 }

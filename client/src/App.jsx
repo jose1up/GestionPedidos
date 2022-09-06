@@ -10,7 +10,8 @@ function App() {
     <Stack display="contents">
       <Headers />
       {/* <Scaner /> */}
-      <ProductList />
+      <NewProduct/>
+      {/* <ProductList /> */}
     </Stack>
   );
 }
