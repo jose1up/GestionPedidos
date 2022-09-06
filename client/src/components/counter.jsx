@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../redux/actions/category";
+import { getAllCategory, creatCategory } from "../redux/actions/category";
 import { createProduct, getAllProduct } from "../redux/actions/products";
+import backImg from "../assets/diseno-cubiertos.jpg"
 import {
     FormControl,
     FormLabel,
@@ -11,7 +12,8 @@ import {
     Stack,
     Box,
     Textarea,
-    Input
+    Input,
+    Image
 } from '@chakra-ui/react'
 
 export const NewProduct = () => {
@@ -43,14 +45,14 @@ export const NewProduct = () => {
             ...input,
             [e.target.name]: e.target.value
         });
+        console.log(input.Cat_name)
     }
 
     const handleSelectChange = (e) => {
         e.preventDefault();
-        if (e.target.name === productName) {
+        if (e.target.name === "productName") {
             if (e.target.value !== "none") {
                 let prod = products.find((element) => element.name === e.target.value)
-                console.log(prod.Category.name)
                 setinput({
                     name: prod.name,
                     Category_id: prod.Category_id,
@@ -65,7 +67,8 @@ export const NewProduct = () => {
                 let cat = categorys.find((element) => element.name === e.target.value)
                 setinput({
                     ...input,
-                    Category_id: cat.id
+                    Category_id: cat.id,
+                    Cat_name: cat.name
                 });
             }
         }
@@ -73,7 +76,12 @@ export const NewProduct = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(createProduct(input));
+        console.log("submit ", e.target.value)
+        newCat==="2"
+            ?dispatch(creatCategory(input)) //dispatch to new category creation
+            :modify==="1"
+                ?dispatch(createProduct(input)) // dispatch to product creation
+                :dispatch() // dispatch to product modification
         setinput("")
     }
 
@@ -111,7 +119,7 @@ export const NewProduct = () => {
             }
             <FormLabel >Category</FormLabel>
             {newCat === "2"
-                ? <Input placeholder={input.Cat_name || 'New category'} type={"Text"} name="new_category" onChange={(e) => handleInputChange(e)} />
+                ? <Input placeholder={input.Cat_name || 'New category'} type={"Text"} name="Cat_name" onChange={(e) => handleInputChange(e)} />
                 : <select placeholder="Select one" name="Category_id" onChange={(e) => handleSelectChange(e)} value={input.Cat_name} >
                     <option key={0} value="none"></option>
                     {categorys && categorys.map((cat) => {
@@ -130,6 +138,7 @@ export const NewProduct = () => {
             <Input placeholder="Price" type={"number"} name="price" onChange={(e) => handleInputChange(e)} value={input.price} />
             <FormLabel >Image</FormLabel>
             <Input placeholder="Image" type={"url"} name="img" onChange={(e) => handleInputChange(e)} value={input.img} />
+            <Image src={input.img} objectFit="cover" alt={input.name} fallbackSrc={backImg} boxSize="10em" borderRadius="1em"/>
             <Button type="submit">Submit</Button>
         </FormControl >
     )
